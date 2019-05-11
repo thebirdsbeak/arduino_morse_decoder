@@ -25,7 +25,6 @@ void setup() {
   pinMode(2, INPUT_PULLUP);
   attachInterrupt(0, buttonPressed, RISING);    
   pinMode(morsePin, OUTPUT);
-
 }
 
 void clearScreen() {
@@ -37,13 +36,11 @@ void buttonPressed() {
   first_space = true;
   code = "";
   clearScreen();
-  
 }
 
 void loop() {
-
 NextDotDash:
-
+  
   timer3 = millis();                    //space timer checks time from last press
   while (digitalRead(inputPin) == HIGH) {}
     space = false;                      //reset to allow spaces to occur
@@ -131,17 +128,19 @@ void decoder() {
       }
       j++;
     }
-    if (letters[i] == "E" && numbers[j] == "E") { //hash if character not found
-      lcd.print("#");
+    if (letters[i] == "E" && numbers[j] == "E") {
+      lcd.print("#");                 //hash if character not found
     }
   }
+  
   code = "";                          //empty code variable for next loop
   first_space = false;                //spaces can happen after first loop
   letterCount += 1;
-  if (letterCount == 16) {
+  
+  if (letterCount == 16) {           //move to second line after 16 chars
     lcd.setCursor(0,1);
   }
-  else if (letterCount == 32) {
+  else if (letterCount == 32) {       //clear screen after 32 chars
     delay(1000);
     clearScreen();
     letterCount = 0;
