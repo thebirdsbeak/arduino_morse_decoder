@@ -29,7 +29,8 @@ void setup() {
 
 void clearScreen() {
   lcd.clear();
-  lcd.setCursor(0,0);  
+  lcd.setCursor(0,0);
+  letterCount = 0;
 }
 
 void buttonPressed() {
